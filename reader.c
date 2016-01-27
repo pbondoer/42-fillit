@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/26 15:11:14 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/01/27 14:51:59 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_list	*read(int fd)
 	t_list = NULL;
 	while ((count = read(fd, buf, 21)) >= 20)
 	{
-		
+		write(1, buf, count);
 	}
 	if (count != 0)
 	{

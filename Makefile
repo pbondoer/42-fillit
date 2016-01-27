@@ -1,40 +1,57 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2015/12/20 16:56:35 by pbondoer         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+ifndef DBUG
+	CFLAGS = -Wall -Werror -Wextra
+endif
 
-NAME	= fillit
-SRC		= main.c
-OBJ		= $(SRC:.c=.o)
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-LIBFT	= libft/libft.a
-LIBINC	= -Ilibft
-LIBLINK	= -Llibft -lft
-all: libft $(NAME)
+NAME = Test_prog
+SRC = main.c \
+	  reader.c \
 
-%.o:%.c
-	$(CC) $(CFLAGS) $(LIBINC) -o $@ -c $<
 
-libft: $(LIBFT)
+OBJ = $(SRC:.c=.o)
 
-$(LIBFT):
-	make -C ./libft
+SRCDIR 	= ./src/
+INCDIR 	= ./includes/
+LIBDIR	= ./libft
+OBJDIR  = ./objs/
 
-$(NAME): $(OBJ)
-	$(CC) $(LIBLINK) -o $(NAME) $(OBJ)
+SRCS   	= $(addprefix $(SRCDIR), $(SRC))
+OBJS   	= $(addprefix $(OBJDIR), $(OBJ))
+
+LIBFLAGS = -L$(LIBDIR) -lft -L/usr/lib -ltermcap
+
+LBLUE	= \033[1;34m
+LGREEN	= \033[1;32m
+NC		= \033[0m
+
+.PHONY : all lib norme clean fclean re
+
+all: lib prefix $(NAME)
+
+$(NAME): $(OBJS)
+	@gcc $(FLAGS) $(LIBFLAGS) -o $(NAME) $(OBJS)
+	@echo "$(LBLUE)$(NAME) a ete cree !$(NC)"
+
+$(OBJDIR)%.o: $(SRCDIR)%.c	
+	@gcc $(CFLAGS) -I $(LIBDIR) -I $(INCDIR) -c -o $@ $^
+	@echo "\t$(LBLUE)$@$(NC) ... [$(LGREEN)OK$(NC)]"
+
+lib: 
+	@Make -C libft/
+
+norme:
+	norminette $(SRCDIR)*.c $(INCDIR)*.h
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJDIR)
+	@make -C $(LIBDIR) clean > /dev/null
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -f $(NAME)
+	@make -C $(LIBDIR) fclean
+	@echo "$(LBLUE)Grand menage$(NC)"
 
 re: fclean all
+
+prefix:
+	@mkdir -p $(OBJDIR)
+	@echo "$(LBLUE)Compilation de $(NAME)$(NC) ..."

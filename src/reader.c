@@ -6,18 +6,13 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/27 14:51:59 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/01/27 15:12:02 by tdupont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-int		check(char **str)
-{
-
-	return (1);
-}
 
 /*
 ** Read tetriminos from fd and put them in a list.
@@ -26,14 +21,14 @@ int		check(char **str)
 ** 4 lines made of 4 chars (+ newline) = 20 chars + sep. newline = 21 chars
 */
 
-t_list	*read(int fd)
+t_list	*read_tetri(int fd)
 {
 	char	*buf;
 	int		count;
 	t_list	*list;
 
 	buf = ft_memalloc(sizeof(char) * 21);
-	t_list = NULL;
+	list = NULL;
 	while ((count = read(fd, buf, 21)) >= 20)
 	{
 		write(1, buf, count);

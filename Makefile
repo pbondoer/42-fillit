@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/01/27 17:49:37 by tdupont          ###   ########.fr        #
+#    Updated: 2016/01/27 17:50:06 by tdupont          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(OBJDIR)%.o:$(SRCDIR)%.c
 libft: $(LIBFT)
 
 $(LIBFT):
-	make -C ../libft
+	make -C ./libft
 
 $(NAME): $(OBJ)
 	$(CC) $(LIBLINK) -o $(NAME) $(OBJ)

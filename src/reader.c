@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/27 17:56:47 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/01/27 18:21:52 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*read_tetri(int fd)
 	int		count;
 	t_list	*list;
 
-	buf = ft_memalloc(sizeof(char) * 21);
+	buf = ft_strnew(21);
 	list = NULL;
 	while ((count = read(fd, buf, 21)) >= 20)
 	{

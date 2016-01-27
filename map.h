@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 15:46:03 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/14 16:23:56 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/01/27 14:30:46 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct		s_map
 {
-	t_vector		size;
-	char			**array;
+	char		size;
+	char		**array;
 }					t_map;
 #endif

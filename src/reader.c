@@ -6,12 +6,56 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/27 20:50:32 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/01/28 18:45:20 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
+#include "tetrimino.h"
+#include <stdio.h>
+
+t_vector	*piece_positions(char *str)
+{
+	int			i;
+	int			c;
+	t_vector	*pos;
+
+	pos = ft_memalloc(sizeof(t_vector) * 4);
+	i = 0;
+	c = 0;
+	while (i < 20)
+	{
+		if (str[i] == '#')
+		{
+			pos[c].x = i % 5;
+			pos[c].y = i / 5;
+			c++;
+		}
+		i++;
+	}
+	return (pos);
+}
+
+t_etris		*build_piece(char *str)
+{
+	int			i;
+	t_vector	*pos;
+//	t_etris		*piece;
+
+	pos = piece_positions(str);
+	i = 0;
+	while (i < 4)
+	{
+		i++;
+	}
+	return (NULL);
+}
+
+
+/*
+** Checks character counts and that chunk format is valid.
+*/
 
 int		check_counts(char *str, int count)
 {
@@ -58,7 +102,7 @@ t_list	*read_tetri(int fd)
 	{
 		if (check_counts(buf, count))
 			return (NULL);
-		if (build_piece(buf, tetris))
+		if ((tetris = build_piece(buf)) == NULL)
 			return (NULL);
 		ft_lstadd(&list, ft_lstnew(tetris, sizeof(tetris)));
 	}

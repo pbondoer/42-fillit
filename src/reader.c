@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/28 18:45:20 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/01/30 17:52:05 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_vector	*piece_positions(char *str)
 	int			c;
 	t_vector	*pos;
 
+	printf("piece_positions\n");
 	pos = ft_memalloc(sizeof(t_vector) * 4);
 	i = 0;
 	c = 0;
@@ -28,6 +29,7 @@ t_vector	*piece_positions(char *str)
 	{
 		if (str[i] == '#')
 		{
+			printf("c=%d, i=%d, x=%d, y=%d\n", c, i, i % 5, i / 5);
 			pos[c].x = i % 5;
 			pos[c].y = i / 5;
 			c++;
@@ -43,6 +45,7 @@ t_etris		*build_piece(char *str)
 	t_vector	*pos;
 //	t_etris		*piece;
 
+	printf("build_piece\n");
 	pos = piece_positions(str);
 	i = 0;
 	while (i < 4)
@@ -62,6 +65,7 @@ int		check_counts(char *str, int count)
 	int i;
 	int blocs;
 
+	printf("check_counts\n");
 	blocs = 0;
 	i = 0;
 	while (i < 20)
@@ -96,14 +100,17 @@ t_list	*read_tetri(int fd)
 	t_list	*list;
 	t_etris	*tetris;
 
+	printf("read_tetri\n");
 	buf = ft_strnew(21);
 	list = NULL;
 	while ((count = read(fd, buf, 21)) >= 20)
 	{
+		printf("%s", buf);
 		if (check_counts(buf, count))
 			return (NULL);
-		if ((tetris = build_piece(buf)) == NULL)
+		if ((tetris = build_piece(buf)) != NULL)
 			return (NULL);
+		printf("piece ok, adding\n\n");
 		ft_lstadd(&list, ft_lstnew(tetris, sizeof(tetris)));
 	}
 	if (count != 0)

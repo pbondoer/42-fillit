@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/02 15:48:58 by tdupont          ###   ########.fr       */
+/*   Updated: 2016/02/02 15:51:10 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int check_connection(char *str)
 				block++;
 			if ((i - 1) > 0 && str[i - 1] == '#')
 				block++;	
-			if ((i + 1) < 20 && str[i + 5] == '#')
+			if ((i + 5) < 20 && str[i + 5] == '#')
 				block++;	
-			if ((i - 1) > 0 && str[i - 5] == '#')
+			if ((i - 5) > 0 && str[i - 5] == '#')
 				block++;
 			printf("la Valeur de la Variable Block est %d \n", block);
 		}

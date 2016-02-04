@@ -6,13 +6,14 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/01/31 23:16:35 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/02/04 18:18:24 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fillit
 SRC		= main.c \
-		  reader.c
+		  reader.c \
+		  tetrimino.c
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror

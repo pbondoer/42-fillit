@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:41:37 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 16:30:56 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/06 23:02:11 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include "fillit.h"
 #include "tetrimino.h"
+#include "map.h"
 
 int		main(int argc, char **argv)
 {
@@ -25,7 +26,6 @@ int		main(int argc, char **argv)
 		ft_putstr("error");
 		return (0);
 	}
-	printf("read %s\n", argv[1]);
 
 	if ((list = read_tetri(open(argv[1], O_RDONLY))) == NULL)
 	{
@@ -33,19 +33,15 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 
-	int x;
-	int y;
-	while (list)
+	t_map	*map;
+	
+	map = solve(list);
+	size_t i;
+
+	i = 0;
+	while (i < map->size)
 	{
-		x = 0;
-		y = 0;
-		printf("[main] w=%d, h=%d\n", ((t_etris *)list->content)->width, ((t_etris *)list->content)->height);
-		while (y < ((t_etris *)list->content)->height)
-		{
-			printf("%s\n", ((t_etris *)list->content)->pos[y]);
-			y++;
-		}
-		printf("===\n");
-		list = list->next;
+		printf("%s\n", map->array[i]);
+		i++;
 	}
 }

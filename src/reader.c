@@ -6,18 +6,17 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 18:21:50 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/06 23:01:48 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 #include "tetrimino.h"
-#include <stdio.h>
 
 void	min_max(char *str, t_point *min, t_point *max)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (i < 20)
@@ -37,12 +36,12 @@ void	min_max(char *str, t_point *min, t_point *max)
 	}
 }
 
-t_etris	*get_piece(char *str)
+t_etris	*get_piece(char *str, char value)
 {
 	t_point		*min;
 	t_point		*max;
 	char		**pos;
-	int			i;
+	size_t		i;
 	t_etris		*tetri;
 
 	min = point_new(3, 3);
@@ -53,11 +52,10 @@ t_etris	*get_piece(char *str)
 	while (i < max->y - min->y + 1)
 	{
 		pos[i] = ft_strnew(max->x - min->x + 1);
-		printf("x = %d, w = %d, y = %d\n", min->x, max->x - min->x + 1, i);
 		ft_strncpy(pos[i], str + (min->x) + (i + min->y) * 5, max->x - min->x + 1);
 		i++;
 	}
-	tetri = tetris_new(pos, max->x - min->x + 1, max->y - min->y + 1);
+	tetri = tetris_new(pos, max->x - min->x + 1, max->y - min->y + 1, value);
 	ft_memdel((void **)&min);
 	ft_memdel((void **)&max);
 	return (tetri);
@@ -137,20 +135,21 @@ t_list	*read_tetri(int fd)
 	int		count;
 	t_list	*list;
 	t_etris	*tetris;
+	char	cur;
 
 	buf = ft_strnew(21);
 	list = NULL;
-	tetris = NULL;
+	cur = 'A';
 	while ((count = read(fd, buf, 21)) >= 20)
 	{
-		if (check_counts(buf, count) != 0 || (tetris = get_piece(buf)) == NULL)
+		if (check_counts(buf, count) != 0
+				|| (tetris = get_piece(buf, cur)) == NULL)
 		{
 			//TODO: Cleanup
-			printf("cleanup read_tetri\n");
 			return (NULL);
 		}
-		printf("adding tetris: w=%d, h=%d\n", tetris->width, tetris->height);
 		ft_lstadd(&list, ft_lstnew(tetris, sizeof(t_etris)));
+		cur++;
 	}
 	if (count != 0)
 		return (NULL);

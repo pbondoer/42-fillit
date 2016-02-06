@@ -6,51 +6,85 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 15:45:52 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/01/31 23:31:52 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/06 23:02:03 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	place(t_map *map, t_etris *mino, t_vector *pos, char id)
-{
-	int			i;
-	t_vector	cur_pos;
+#include "map.h"
+#include "libft.h"
+#include "tetrimino.h"
 
-	if (pos->x + mino->size->x > map->size->x
-			|| pos->y + mino->size->y > map->size->y)
-		return (-1);
+t_map	*map_new(size_t size)
+{
+	t_map	*map;
+	size_t	i;
+	size_t	j;
+
+	map = (t_map *)ft_memalloc(sizeof(t_map));
+	map->size = size;
+	map->array = (char **)ft_memalloc(sizeof(char *) * size);
 	i = 0;
-	while (i < 4)
+	while (i < size)
 	{
-		cur_pos = get_pos(mino, i);
-		if (!map->array[pos->x + cur_pos->x][pos->y + cur_pos->y])
+		map->array[i] = ft_strnew(size);
+		j = 0;
+		while (j < size)
 		{
-			while (i > 0)
-			{
-				i--;
-				remove(map, mino, pos);
-			}
-			return (0);
+			map->array[i][j] = '.';
+			j++;
 		}
-		map->array[pos->x + cur_pos->x][pos->y + cur_pos->y] = id;
+		i++;
+	}
+	return (map);
+}
+
+int		place(t_etris *tetri, t_map *map, size_t x, size_t y)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (i < tetri->width)
+	{
+		j = 0;
+		while (j < tetri->height)
+		{
+			if (tetri->pos[j][i] == '#' && map->array[y + j][x + i] != '.')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < tetri->width)
+	{
+		j = 0;
+		while (j < tetri->height)
+		{
+			if (tetri->pos[j][i] == '#')
+				map->array[y + j][x + i] = tetri->value;
+			j++;
+		}
 		i++;
 	}
 	return (1);
 }
 
-/*
-** remove() assumes you have already added mino; no checks are performaed.
-*/
-
-int	remove(t_map *map, t_etris *mino, t_vector *pos)
+void	remove_piece(t_etris *tetri, t_map *map, size_t x, size_t y)
 {
-	int			i;
-	t_vector	cur_pos;
+	size_t i;
+	size_t j;
 
 	i = 0;
-	while (i < 4)
+	while (i < tetri->width)
 	{
-		cur_pos = get_pos(mino, i);
-		map->array[pos->x + cur_pos->x][pos->y + cur_pos->y] = 0;
+		j = 0;
+		while (j < tetri->height)
+		{
+			if (tetri->pos[j][i] == '#')
+				map->array[y + j][x + i] = '.';
+			j++;
+		}
+		i++;
 	}
-	return (1);
 }

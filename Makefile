@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/02/06 16:33:24 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/02/06 21:42:15 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,14 @@ NAME	= fillit
 
 SRC		= main.c \
 		  reader.c \
-		  tetrimino.c
+		  tetrimino.c \
+		  map.c \
+		  solver.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror	
+CFLAGS	= -Wall -Wextra -Werror -g	
 
 LIBFT	= ./libft/libft.a
 LIBINC	= -I./libft
@@ -34,9 +36,7 @@ all: libft $(NAME)
 $(OBJDIR)%.o:$(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(LIBINC) -I $(INCDIR) -o $@ -c $<
 
-libft: $(LIBFT)
-
-$(LIBFT):
+libft:
 	make -C ./libft
 
 $(NAME): $(OBJ)

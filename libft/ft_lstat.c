@@ -6,18 +6,18 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 18:59:01 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 19:01:23 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/06 19:13:02 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstat(t_list lst, size_t val)
+t_list	*ft_lstat(t_list *lst, size_t val)
 {
-	int i;
+	size_t i;
 
 	i = 0;
-	while (i < val && lst != null)
+	while (i < val && lst != NULL)
 	{
 		lst = lst->next;
 		i++;

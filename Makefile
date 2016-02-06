@@ -6,19 +6,26 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/02/04 18:18:24 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/02/06 16:29:58 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= fillit
+NAME	= fillit 
+
 SRC		= main.c \
 		  reader.c \
 		  tetrimino.c
+
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
+
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+
+CFLAGS	= -Wall -Wextra -Werror	
+
 LIBFT	= ./libft/libft.a
+
 LIBINC	= -I./libft
+
 LIBLINK	= -L./libft -lft
 
 SRCDIR	= ./src/

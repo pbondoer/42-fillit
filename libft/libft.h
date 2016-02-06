@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 19:59:25 by pbondoer          #+#    #+#             */
-/*   Updated: 2015/12/04 02:46:18 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/06 19:09:38 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+void			ft_lstrev(t_list **alst);
+size_t			ft_lstcount(t_list *lst);
+t_list			*ft_lstat(t_list lst, size_t val);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_abs(int i);

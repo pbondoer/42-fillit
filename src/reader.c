@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/04 18:45:19 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/06 18:21:50 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ t_list	*read_tetri(int fd)
 	}
 	if (count != 0)
 		return (NULL);
+	ft_lstrev(&list);
 	return (list);
 }

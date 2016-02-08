@@ -1,6 +1,8 @@
 # fillit @ 42
 Can you feel it?
 
+Group project with tdupont@42
+
 After finishing libft, fillit is the second mandatory project before
 get_next_line, and after that, you branch out. The purpose is to make the
 smallest possible "square" (which can contain holes) with a given list of

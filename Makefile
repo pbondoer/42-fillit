@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/02/06 23:14:09 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/02/08 15:24:08 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ all: libft $(NAME)
 $(OBJDIR)%.o:$(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(LIBINC) -I $(INCDIR) -o $@ -c $<
 
-libft:
+libft: $(LIBFT)
+
+$(LIBFT):
 	make -C ./libft
 
 $(NAME): $(OBJ)

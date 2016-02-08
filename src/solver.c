@@ -6,13 +6,17 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 15:19:32 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/08 11:25:36 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/08 12:16:45 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "libft.h"
 #include "fillit.h"
+
+/*
+** Backtracking implementation of the solver.
+*/
 
 int		solve_map(t_map *map, t_list *list)
 {
@@ -34,7 +38,7 @@ int		solve_map(t_map *map, t_list *list)
 				if (solve_map(map, list->next))
 					return (1);
 				else
-					remove_piece(tetri, map, x, y);
+					set_piece(tetri, map, point_new(x, y), '.');
 			}
 			x++;
 		}
@@ -43,15 +47,23 @@ int		solve_map(t_map *map, t_list *list)
 	return (0);
 }
 
-size_t	high_sqrt(size_t count)
+/*
+** Gets the rounded up sqrt of a number. Equivalent to ceil(sqrt(n)).
+*/
+
+size_t	high_sqrt(size_t n)
 {
 	size_t size;
 
 	size = 2;
-	while (size * size < count)
+	while (size * size < n)
 		size++;
 	return (size);
 }
+
+/*
+** Tries to solve maps starting from the smallest possible size.
+*/
 
 t_map	*solve(t_list *list)
 {

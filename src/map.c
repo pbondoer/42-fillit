@@ -6,12 +6,16 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 15:45:52 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/07 07:16:18 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/08 12:05:06 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+
+/*
+** Frees an allocated map structure.
+*/
 
 void	free_map(t_map *map)
 {
@@ -27,6 +31,10 @@ void	free_map(t_map *map)
 	ft_memdel((void **)&map);
 }
 
+/*
+** Prints an allocated map structure to standard output.
+*/
+
 void	print_map(t_map *map)
 {
 	size_t i;
@@ -39,6 +47,10 @@ void	print_map(t_map *map)
 		i++;
 	}
 }
+
+/*
+** Allocates a new map structure with specified size.
+*/
 
 t_map	*map_new(size_t size)
 {
@@ -64,6 +76,11 @@ t_map	*map_new(size_t size)
 	return (map);
 }
 
+/*
+** Places a tetrimino on map at specified position, checking if the placement is
+** possible.
+*/
+
 int		place(t_etris *tetri, t_map *map, size_t x, size_t y)
 {
 	size_t i;
@@ -81,22 +98,16 @@ int		place(t_etris *tetri, t_map *map, size_t x, size_t y)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < tetri->width)
-	{
-		j = 0;
-		while (j < tetri->height)
-		{
-			if (tetri->pos[j][i] == '#')
-				map->array[y + j][x + i] = tetri->value;
-			j++;
-		}
-		i++;
-	}
+	set_piece(tetri, map, point_new(x, y), tetri->value);
 	return (1);
 }
 
-void	remove_piece(t_etris *tetri, t_map *map, size_t x, size_t y)
+/*
+** Sets a tetrimino on a map at a position with the specified character.
+** To place, call with c=tetri->value. To remove, call with c='.'.
+*/
+
+void	set_piece(t_etris *tetri, t_map *map, t_point *point, char c)
 {
 	size_t i;
 	size_t j;
@@ -108,9 +119,10 @@ void	remove_piece(t_etris *tetri, t_map *map, size_t x, size_t y)
 		while (j < tetri->height)
 		{
 			if (tetri->pos[j][i] == '#')
-				map->array[y + j][x + i] = '.';
+				map->array[point->y + j][point->x + i] = c;
 			j++;
 		}
 		i++;
 	}
+	ft_memdel((void **)&point);
 }

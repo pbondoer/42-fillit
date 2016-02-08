@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/02/08 15:24:08 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/02/08 15:25:35 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,10 @@ SRCDIR	= ./src/
 INCDIR	= ./includes/
 OBJDIR	= ./obj/
 
-all: libft $(NAME)
+all: obj libft $(NAME)
+
+obj:
+	mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o:$(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(LIBINC) -I $(INCDIR) -o $@ -c $<

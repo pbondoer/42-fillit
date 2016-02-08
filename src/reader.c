@@ -6,13 +6,13 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 23:01:48 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:40:41 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
-#include "tetrimino.h"
+#include "fillit.h"
 
 void	min_max(char *str, t_point *min, t_point *max)
 {
@@ -122,6 +122,22 @@ int		check_counts(char *str, int count)
 	return (0);
 }
 
+t_list	*free_list(t_list *list)
+{
+	t_etris	*tetris;
+	t_list	*next;
+
+	while (list)
+	{
+		tetris = (t_etris *)list->content;
+		next = list->next;
+		free_tetris(tetris);
+		ft_memdel((void **)&list);
+		list = next;
+	}
+	return (NULL);
+}
+
 /*
  ** Read tetriminos from fd and put them in a list.
  **
@@ -145,14 +161,16 @@ t_list	*read_tetri(int fd)
 		if (check_counts(buf, count) != 0
 				|| (tetris = get_piece(buf, cur)) == NULL)
 		{
-			//TODO: Cleanup
-			return (NULL);
+			ft_memdel((void **)&buf);
+			return (free_list(list));
 		}
 		ft_lstadd(&list, ft_lstnew(tetris, sizeof(t_etris)));
+		ft_memdel((void **)&tetris);
 		cur++;
 	}
+	ft_memdel((void **)&buf);
 	if (count != 0)
-		return (NULL);
+		return (free_list(list));
 	ft_lstrev(&list);
 	return (list);
 }

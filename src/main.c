@@ -6,42 +6,37 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:41:37 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 23:02:11 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:51:47 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include "libft.h"
 #include "fillit.h"
-#include "tetrimino.h"
-#include "map.h"
+
+/*
+** Entry point for our application
+*/
 
 int		main(int argc, char **argv)
 {
 	t_list	*list;
+	t_map	*map;
 
 	if (argc != 2)
 	{
-		ft_putstr("error");
-		return (0);
+		ft_putstr("usage: fillit input_file\n");
+		return (1);
 	}
-
 	if ((list = read_tetri(open(argv[1], O_RDONLY))) == NULL)
 	{
-		ft_putstr("error: got null\n");
-		return (0);
+		ft_putstr("error\n");
+		return (1);
 	}
-
-	t_map	*map;
-	
 	map = solve(list);
-	size_t i;
-
-	i = 0;
-	while (i < map->size)
-	{
-		printf("%s\n", map->array[i]);
-		i++;
-	}
+	print_map(map);
+	free_map(map);
+	free_list(list);
+	return (0);
 }

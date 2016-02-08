@@ -6,13 +6,39 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 15:45:52 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 23:02:03 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/07 07:16:18 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "fillit.h"
 #include "libft.h"
-#include "tetrimino.h"
+
+void	free_map(t_map *map)
+{
+	size_t i;
+
+	i = 0;
+	while (i < map->size)
+	{
+		ft_memdel((void **)&(map->array[i]));
+		i++;
+	}
+	ft_memdel((void **)&(map->array));
+	ft_memdel((void **)&map);
+}
+
+void	print_map(t_map *map)
+{
+	size_t i;
+
+	i = 0;
+	while (i < map->size)
+	{
+		ft_putstr(map->array[i]);
+		ft_putchar('\n');
+		i++;
+	}
+}
 
 t_map	*map_new(size_t size)
 {

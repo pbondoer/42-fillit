@@ -6,14 +6,13 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 15:19:32 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 23:00:29 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:25:36 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include "map.h"
 #include "libft.h"
-#include "tetrimino.h"
+#include "fillit.h"
 
 int		solve_map(t_map *map, t_list *list)
 {
@@ -44,18 +43,27 @@ int		solve_map(t_map *map, t_list *list)
 	return (0);
 }
 
+size_t	high_sqrt(size_t count)
+{
+	size_t size;
+
+	size = 2;
+	while (size * size < count)
+		size++;
+	return (size);
+}
+
 t_map	*solve(t_list *list)
 {
 	t_map	*map;
 	size_t	size;
 
-	//TODO: get_minsize
-	size = 4;
+	size = high_sqrt(ft_lstcount(list) * 4);
 	map = map_new(size);
 	while (!solve_map(map, list))
 	{
 		size++;
-		//TODO: Free old map
+		free_map(map);
 		map = map_new(size);
 	}
 	return (map);

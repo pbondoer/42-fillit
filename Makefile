@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/02/08 15:25:35 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/02/08 17:42:07 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ $(NAME): $(OBJ)
 	$(CC) $(LIBLINK) -o $(NAME) $(OBJ)
 
 clean:
-	rm -rf $(OBJDIR)*
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME)

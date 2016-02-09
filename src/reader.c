@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/08 12:14:28 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/09 16:24:39 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		check_counts(char *str, int count)
 		{
 			if (!(str[i] == '#' || str[i] == '.'))
 				return (1);
-			if (str[i] == '#' && blocs++ > 4)
+			if (str[i] == '#' && ++blocs > 4)
 				return (2);
 		}
 		else if (str[i] != '\n')

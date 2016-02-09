@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 15:45:52 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/08 12:05:06 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/09 16:53:22 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	free_map(t_map *map)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < map->size)
@@ -37,7 +37,7 @@ void	free_map(t_map *map)
 
 void	print_map(t_map *map)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < map->size)
@@ -52,11 +52,11 @@ void	print_map(t_map *map)
 ** Allocates a new map structure with specified size.
 */
 
-t_map	*map_new(size_t size)
+t_map	*map_new(int size)
 {
 	t_map	*map;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
 	map = (t_map *)ft_memalloc(sizeof(t_map));
 	map->size = size;
@@ -81,10 +81,10 @@ t_map	*map_new(size_t size)
 ** possible.
 */
 
-int		place(t_etris *tetri, t_map *map, size_t x, size_t y)
+int		place(t_etris *tetri, t_map *map, int x, int y)
 {
-	size_t i;
-	size_t j;
+	int i;
+	int j;
 
 	i = 0;
 	while (i < tetri->width)
@@ -109,8 +109,8 @@ int		place(t_etris *tetri, t_map *map, size_t x, size_t y)
 
 void	set_piece(t_etris *tetri, t_map *map, t_point *point, char c)
 {
-	size_t i;
-	size_t j;
+	int i;
+	int j;
 
 	i = 0;
 	while (i < tetri->width)

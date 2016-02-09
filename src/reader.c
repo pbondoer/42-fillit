@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 17:43:27 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/09 16:24:39 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/09 16:53:44 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void	min_max(char *str, t_point *min, t_point *max)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < 20)
@@ -49,7 +49,7 @@ t_etris	*get_piece(char *str, char value)
 	t_point		*mi;
 	t_point		*max;
 	char		**pos;
-	size_t		i;
+	int			i;
 	t_etris		*tetri;
 
 	mi = point_new(3, 3);

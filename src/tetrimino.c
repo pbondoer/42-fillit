@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 18:06:28 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/08 12:18:00 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/09 16:55:08 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list		*free_list(t_list *list)
 
 void		free_tetris(t_etris *tetri)
 {
-	size_t y;
+	int y;
 
 	y = 0;
 	while (y < tetri->height)
@@ -55,7 +55,7 @@ void		free_tetris(t_etris *tetri)
 ** Creates a new tetrimino structure.
 */
 
-t_etris		*tetris_new(char **pos, size_t width, size_t height, char value)
+t_etris		*tetris_new(char **pos, int width, int height, char value)
 {
 	t_etris		*tetris;
 
@@ -71,7 +71,7 @@ t_etris		*tetris_new(char **pos, size_t width, size_t height, char value)
 ** Creates a new point structure.
 */
 
-t_point		*point_new(size_t x, size_t y)
+t_point		*point_new(int x, int y)
 {
 	t_point		*point;
 

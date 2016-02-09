@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 15:19:32 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/08 12:16:45 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/09 16:50:05 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 int		solve_map(t_map *map, t_list *list)
 {
-	size_t		x;
-	size_t		y;
+	int			x;
+	int			y;
 	t_etris		*tetri;
 
 	if (list == NULL)
@@ -51,9 +51,9 @@ int		solve_map(t_map *map, t_list *list)
 ** Gets the rounded up sqrt of a number. Equivalent to ceil(sqrt(n)).
 */
 
-size_t	high_sqrt(size_t n)
+int	high_sqrt(int n)
 {
-	size_t size;
+	int size;
 
 	size = 2;
 	while (size * size < n)
@@ -68,7 +68,7 @@ size_t	high_sqrt(size_t n)
 t_map	*solve(t_list *list)
 {
 	t_map	*map;
-	size_t	size;
+	int		size;
 
 	size = high_sqrt(ft_lstcount(list) * 4);
 	map = map_new(size);

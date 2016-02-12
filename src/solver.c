@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 15:19:32 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/09 16:50:05 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/02/12 13:52:08 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		solve_map(t_map *map, t_list *list)
 ** Gets the rounded up sqrt of a number. Equivalent to ceil(sqrt(n)).
 */
 
-int	high_sqrt(int n)
+int		high_sqrt(int n)
 {
 	int size;
 

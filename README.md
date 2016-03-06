@@ -3,6 +3,9 @@ Can you feel it?
 
 Group project with tdupont@42
 
+**There is a better, faster version that uses bitfields [over
+here](https://github.com/pbondoer/42-fillit-bitwise), check it out!**
+
 After finishing libft, fillit is the second mandatory project before
 get_next_line, and after that, you branch out. The purpose is to make the
 smallest possible "square" (which can contain holes) with a given list of
@@ -36,6 +39,7 @@ e-mail/Slack/whatever! Find me on the intranet, my login is the same as on
 GitHub :)! 
 
 Also, yes, I am aware this isn't the fastest there is, but it will validate the
-project just fine, so I'm not going to bother for now. I'll try some other time.
+project just fine, so ~~I'm not going to bother for now. I'll try some other
+time.~~ Actually, I finally got around to trying :)!
 
 Good luck, and thanks for all the fish!

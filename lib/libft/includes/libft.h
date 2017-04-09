@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 19:59:25 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/02/06 19:13:29 by pbondoer         ###   ########.fr       */
+/*   Updated: 2017/02/03 04:06:22 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char			*ft_strstr(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strmerge(char *s1, char *s2);
 int				ft_atoi(const char *str);
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
@@ -63,6 +64,7 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
+int				ft_splitdel(char ***split);
 char			*ft_itoa(int n);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);
@@ -75,15 +77,21 @@ void			ft_putnbr_fd(int n, int fd);
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void			ft_lstdelfn(void *obj, size_t size);
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_lstrev(t_list **alst);
 size_t			ft_lstcount(t_list *lst);
 t_list			*ft_lstat(t_list *lst, size_t val);
+void			ft_lstremove(t_list **alst, void *content);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_abs(int i);
 int				ft_iswhitespace(char c);
-size_t			ft_countwords(char *str, char c);
+int				ft_countwords(char *str, char c);
+double			ft_lerp(double first, double second, double p);
+double			ft_ilerp(double val, double first, double second);
+int				ft_lerpi(int first, int second, double p);
+float			ft_clamp(float i, float a, float b);
 #endif

@@ -6,31 +6,47 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/01 21:02:30 by pbondoer          #+#    #+#              #
-#    Updated: 2016/01/07 20:57:34 by pbondoer         ###   ########.fr        #
+#    Updated: 2017/02/03 00:34:04 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libft.a
-SRC		= $(shell ls | grep -E "ft_.+\.c")
-OBJ		= $(SRC:.c=.o)
+include libft.mk
+
+SRC_DIR	= ./src
+INC_DIR	= ./includes
+OBJ_DIR	= ./obj
+
+RAW_SRC	:= $(shell find $(SRC_DIR) -type f | grep -E "\.c$$")
+RAW_DIRS:= $(shell find $(SRC_DIR) -type d -mindepth 1)
+SRCDIRS = $(RAW_DIRS:./src/%=%)
+SRC		= $(RAW_SRC:./src/%=%)
+OBJ		= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
+CFLAGS += -O3 -march=native -pipe
 
-all: $(NAME)
+.PHONY: all clean fclean re
 
-%.o:%.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+all: $(OBJ_DIR) $(FT_NAME)
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+	mkdir -p $(addprefix $(OBJ_DIR)/,$(SRCDIRS))
+
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) $(FT_INC) -o $@ -c $<
+
+$(FT_NAME): $(OBJ)
+	ar rc $(FT_NAME) $(OBJ)
+	ranlib $(FT_NAME)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(FT_NAME)
 
-re: fclean all
-
-test: fclean all fclean
+re:
+	@$(MAKE) fclean --no-print-directory
+	@$(MAKE) all --no-print-directory

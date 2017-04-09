@@ -6,51 +6,60 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/05 02:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/02/08 17:42:07 by pbondoer         ###   ########.fr        #
+#    Updated: 2017/04/09 11:31:40 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= fillit 
+NAME	:= fillit 
 
-SRC		= main.c \
-		  reader.c \
-		  tetrimino.c \
-		  map.c \
-		  solver.c
+# directories
+SRC_DIR	:= ./src
+INC_DIR	:= ./includes
+OBJ_DIR	:= ./obj
+LIB_DIR	:= ./lib
 
-OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
+# src / obj files
+SRC		:= main.c \
+		   reader.c \
+		   solver.c \
+		   map.c \
+		   tetrimino.c
+OBJ		:= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+# compiler and flags
+CC		:= gcc
+CFLAGS	:= -Wall -Wextra -Werror -pedantic -std=c99
+OFLAGS	:= -pipe -flto
+CFLAGS	+= $(OFLAGS)
 
-LIBFT	= ./libft/libft.a
-LIBINC	= -I./libft
-LIBLINK	= -L./libft -lft
+# libraries
+L_FT	:= $(LIB_DIR)/libft
 
-SRCDIR	= ./src/
-INCDIR	= ./includes/
-OBJDIR	= ./obj/
+include $(L_FT)/libft.mk
 
-all: obj libft $(NAME)
+.PHONY: all clean fclean re
 
-obj:
-	mkdir -p $(OBJDIR)
+all:
+	mkdir -p $(OBJ_DIR)
+	@$(MAKE) -C $(L_FT) --no-print-directory
+	@$(MAKE) $(NAME) --no-print-directory
 
-$(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(LIBINC) -I $(INCDIR) -o $@ -c $<
-
-libft: $(LIBFT)
-
-$(LIBFT):
-	make -C ./libft
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -o $@ -c $<
 
 $(NAME): $(OBJ)
-	$(CC) $(LIBLINK) -o $(NAME) $(OBJ)
+	$(CC) $(OFLAGS) $(OBJ) $(LIB_LNK) -o $(NAME)
 
 clean:
-	rm -rf $(OBJDIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
 
-re: fclean all
+re:
+	@$(MAKE) fclean --no-print-directory
+	@$(MAKE) all --no-print-directory
+
+relibs:
+	@$(MAKE) -C $(L_FT) re --no-print-directory
+	@$(MAKE) re --no-print-directory

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 18:45:39 by pbondoer          #+#    #+#             */
-/*   Updated: 2015/12/04 03:45:13 by pbondoer         ###   ########.fr       */
+/*   Created: 2016/02/21 14:12:07 by pbondoer          #+#    #+#             */
+/*   Updated: 2016/02/21 14:15:19 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+char	*ft_strmerge(char *a, char *b)
 {
-	char	*str;
+	char	*ret;
 
-	str = ft_itoa(n);
-	ft_putstr_fd(str, fd);
-	ft_strdel(&str);
+	ret = ft_strjoin(a, b);
+	ft_strdel(&a);
+	ft_strdel(&b);
+	return (ret);
 }

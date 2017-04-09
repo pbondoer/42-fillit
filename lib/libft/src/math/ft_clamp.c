@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_clamp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 23:19:39 by pbondoer          #+#    #+#             */
-/*   Updated: 2015/12/11 22:37:57 by pbondoer         ###   ########.fr       */
+/*   Created: 2016/12/27 23:19:12 by pbondoer          #+#    #+#             */
+/*   Updated: 2016/12/27 23:20:27 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+/*
+** Clamps a value between two values
+*/
 
-void	*ft_memchr(const void *s, int c, size_t n)
+double		ft_clamp(double i, double a, double b)
 {
-	size_t			i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-			return (((void *)&s[i]));
-		i++;
-	}
-	return (NULL);
+	if (i < a)
+		i = a;
+	if (i > b)
+		i = b;
+	return (i);
 }

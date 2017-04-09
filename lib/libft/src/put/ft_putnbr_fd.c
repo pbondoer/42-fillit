@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 18:42:59 by pbondoer          #+#    #+#             */
-/*   Updated: 2015/12/02 18:44:03 by pbondoer         ###   ########.fr       */
+/*   Created: 2015/12/02 18:45:39 by pbondoer          #+#    #+#             */
+/*   Updated: 2017/02/02 20:09:52 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+inline static void	putlong(long n, int fd)
 {
-	write(fd, &c, 1);
+	if (n >= 10)
+		putlong(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
+}
+
+void				ft_putnbr_fd(int n, int fd)
+{
+	long	v;
+
+	v = n;
+	if (v < 0)
+	{
+		ft_putchar_fd('-', fd);
+		v = -v;
+	}
+	putlong(v, fd);
 }

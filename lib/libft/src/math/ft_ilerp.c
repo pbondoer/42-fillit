@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_countwords.c                                    :+:      :+:    :+:   */
+/*   ft_ilerp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 17:33:40 by pbondoer          #+#    #+#             */
-/*   Updated: 2015/12/02 19:44:59 by pbondoer         ###   ########.fr       */
+/*   Created: 2016/05/11 01:06:57 by pbondoer          #+#    #+#             */
+/*   Updated: 2016/12/28 01:09:34 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
-
-size_t	ft_countwords(char *str, char sep)
+double	ft_ilerp(double val, double first, double second)
 {
-	size_t result;
-	size_t i;
-
-	i = 0;
-	result = 0;
-	while (str[i] && str[i] == sep)
-		i++;
-	while (str[i])
-	{
-		while (str[i] && str[i] != sep)
-			i++;
-		result++;
-		while (str[i] && str[i] == sep)
-			i++;
-	}
-	return (result);
+	if (val == first)
+		return (0.0);
+	if (val == second)
+		return (1.0);
+	return ((val - first) / (second - first));
 }
